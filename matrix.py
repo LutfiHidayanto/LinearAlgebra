@@ -22,7 +22,7 @@ def gauss_jordan_elimination(A, b):
     n = A.shape[0]  # Number of equations
     m = A.shape[1]  # Number of variables
 
-    # Convert matrix A and vector b to float data type
+    # Convert matrix A and vector b into float data type from int
     A = A.astype(float)
     b = b.astype(float)
 
@@ -40,6 +40,7 @@ def gauss_jordan_elimination(A, b):
 
         if abs(aug_matrix[i, i]) < 1e-10:  # Check for zero pivot
             rank = np.linalg.matrix_rank(aug_matrix[:, :-1])
+            # comparing rank with number of variables
             if rank < m:
                 print("The system of equations is underdetermined with infinite solutions.")
                 # Calculate the general solution
@@ -51,7 +52,7 @@ def gauss_jordan_elimination(A, b):
                     if j < rank:
                         general_solution[f'x{j+1}'] = solutions[x[j]]
                     else:
-                        general_solution[f'x{j+1}'] = x[j]  # Store the symbol for remaining variables
+                        general_solution[f'x{j+1}'] = x[j]  # Storing symbol like x1, x2, etc
                 return general_solution
             else:
                 print("The system of equations has no solution.")
@@ -63,7 +64,7 @@ def gauss_jordan_elimination(A, b):
             if j != i:
                 aug_matrix[j, :] -= aug_matrix[j, i] * aug_matrix[i, :]
 
-    # Extract the solution
+    # Forming solution
     x = aug_matrix[:, -1]
 
     solution = {}
@@ -74,7 +75,7 @@ def gauss_jordan_elimination(A, b):
 
 
 def solve_linear_equation(A, b):
-    # Solve the linear equation system Ax = b
+    # Ax = b
     # A: coefficient matrix
     # b: constant vector
     print("Choose solving method")
@@ -93,13 +94,17 @@ def solve_linear_equation(A, b):
             print("Using LU decomposition with partial pivoting")
             x = np.linalg.solve(A, b)
             print(f"Solution: {x}")
+        # Catch exception if matrix is non square, or there is no solution or infinite
         except np.linalg.LinAlgError:
             print("The system of equations has no solution or underdetermined")
             return None
+    # For non square matrix
     elif choice == 3:
         print("Using Least Square Approach:")
+        # solving problem using least square and store the results in x
         x, residual, rank, s = np.linalg.lstsq(A, b, rcond=None)
-        if rank < A.shape[1]:
+        # comparing rank with number of variables
+        if rank < A.shape[1]: 
             print("The system of equations has no solution.")
             return None
         elif rank < A.shape[1]:
@@ -108,102 +113,23 @@ def solve_linear_equation(A, b):
         else:
             print("The system of equations has a unique solution.")
             print(f"Solution: {x}")
+    # if input is invalid
     else:
         return None
     return x
 
 def singular_value_decomposition(matrix):
-    # Perform Singular Value Decomposition (SVD) on a matrix
-    # matrix: input matrix
-    
+    # calculate SVD 
     U, S, V = np.linalg.svd(matrix)
     print(f"U:\n {U}\nS:\n {S}\nV:\n {V}")
     return {'U': U, 'S': S, 'V': V}
 
-def solvecomp_linear_equations(A, b):
-    n = A.shape[0]  # Number of equations
-    m = A.shape[1]  # Number of variables
-
-    # Augmented matrix [A|b]
-    aug_matrix = np.concatenate((A, np.expand_dims(b, axis=1)), axis=1)
-
-    # Check if A is square or non-square
-    if n == m:  # Square matrix
-        rank = np.linalg.matrix_rank(aug_matrix[:, :-1])
-        if rank < m:
-            print("The system of equations is underdetermined with infinite solutions.")
-            # Calculate the general solution
-            general_solution = {}
-            x = symbols('x1:%d' % (m + 1))
-            equations = [Eq(aug_matrix[j, :-1].dot(x), aug_matrix[j, -1]) for j in range(rank)]
-            solutions = solve(equations, x[:rank])
-            for j in range(m):
-                if j < rank:
-                    general_solution[f'x{j+1}'] = solutions[x[j]]
-                else:
-                    general_solution[f'x{j+1}'] = x[j]  # Store the symbol for remaining variables
-            return general_solution
-        elif rank == m:
-            # Apply Gauss-Jordan elimination
-            aug_matrix = aug_matrix.astype(complex)
-            for i in range(n):
-                # Partial pivoting
-                max_row = i
-                for j in range(i + 1, n):
-                    if abs(aug_matrix[j, i]) > abs(aug_matrix[max_row, i]):
-                        max_row = j
-                aug_matrix[[i, max_row], :] = aug_matrix[[max_row, i], :]
-
-                if abs(aug_matrix[i, i]) < 1e-10:  # Check for zero pivot
-                    print("The system of equations has no solution.")
-                    return None
-
-                # Row operations
-                aug_matrix[i, :] /= aug_matrix[i, i]
-                for j in range(n):
-                    if j != i:
-                        aug_matrix[j, :] -= aug_matrix[j, i] * aug_matrix[i, :]
-
-            # Extract the solution
-            x = aug_matrix[:, -1]
-
-            solution = {}
-            for i in range(m):
-                solution[f'x{i+1}'] = x[i]
-
-            return solution
-        else:  # rank > m
-            print("The system of equations is overdetermined and has no solution.")
-            return None
-    else:  # Non-square matrix
-        rank = np.linalg.matrix_rank(A)
-        if rank < n:
-            print("The system of equations is underdetermined with infinite solutions.")
-            # Calculate the general solution
-            general_solution = {}
-            x = symbols('x1:%d' % (m + 1))
-            equations = [Eq(aug_matrix[j, :-1].dot(x), aug_matrix[j, -1]) for j in range(rank)]
-            solutions = solve(equations, x[:rank])
-            for j in range(m):
-                if j < rank:
-                    general_solution[f'x{j+1}'] = solutions[x[j]]
-                else:
-                    general_solution[f'x{j+1}'] = x[j]  # Store the symbol for remaining variables
-            return general_solution
-        elif rank == n:
-            print("The system of equations has no unique solution.")
-            return None
-        else:  # rank > n
-            print("The system of equations is overdetermined and has no solution.")
-            return None
-
-
 def solve_complex_linear_equation(A, b):
     # Singular Value Decomposition
+    # if matrix is square then use SVD method
     if A.shape[0] == A.shape[1]:
         print("Using SVD method")
         U, s, Vh = np.linalg.svd(A)
-
         # Pseudoinverse of Σ
         S_inv = np.zeros(A.shape, dtype=complex)
         S_inv[:A.shape[1], :A.shape[1]] = np.diag(1/s)
@@ -211,6 +137,7 @@ def solve_complex_linear_equation(A, b):
         # Compute the solution matrix X
         X = Vh.conj().T @ S_inv @ U.conj().T @ b[:, np.newaxis]
         X = X.flatten()
+    # if matrix non square, use moore-penrose 
     else:
         print("Using Moore-Penrose pseudoinverse")
         A_inv = np.linalg.pinv(A)
@@ -219,9 +146,7 @@ def solve_complex_linear_equation(A, b):
     return X
 
 def is_diagonal(matrix):
-    # Check if a matrix is diagonalized
-    # matrix: input matrix
-    
+    # Check if a matrix is diagonalized 
     eigenvalues, _ = np.linalg.eig(matrix)
     is_diagonal = np.allclose(matrix, np.diag(eigenvalues))
     if is_diagonal:
@@ -231,23 +156,44 @@ def is_diagonal(matrix):
     return is_diagonal
 
 def eigenvalues_vector(matrix):
+    # Calculate eigenvalues and eigenvectors
     eigenvalues, eigenvector  = np.linalg.eig(matrix)
     print(f"Eigenvalues: {eigenvalues}")
     print(f"Eigenvector:\n {eigenvector}")
     return {"Eigenvalues": eigenvalues, "Eigenvector": eigenvector}
 
 def polynomial_char(matrix):
+    # calculate polynomaial characteristics
     eigenvalues = np.linalg.eigvals(matrix)
-    sol = np.poly(eigenvalues)
-    print(f"Polynomial Characteristics:\n {sol}")
-    return sol
+    polychar = np.poly(eigenvalues)
+    print(f"Polynomial Characteristics:\n {polychar}")
+    return polychar
 
 def invers(matrix):
+    # calculate matrix invers
     invers = np.linalg.inv(matrix)
     print(f"Invers matrix:\n {invers}")
     return invers
 
+def diagonalize_matrix(A):
+    # calculate the eigendecomposition of A
+    eigenvalues, eigenvectors = np.linalg.eig(A)
+    # construct the diagonal matrix D with eigenvalues
+    D = np.diag(eigenvalues)
+    # Construct the matrix P with eigenvectors as columns
+    P = eigenvectors
+    # calculate the inverse of P
+    P_inv = np.linalg.inv(P)
+    # calculate P^(-1)AP
+    diagonalized_A = P_inv @ A @ P
+    print(f"Matrix P:\n {P}") 
+    print(f"Diagonal D:\n {D}")
+    print(F"Diagonalized A:\n {diagonalized_A}")
+    return {"P": P, "D": D, "Diagonalized A": diagonalized_A}
+
+
 def twod_input():
+    # Handling 2 dimension input matrix 
     print("Enter matrix A")
     rows = int(input("Enter the number of rows: "))
     cols = int(input("Enter the number of columns: "))
@@ -264,21 +210,6 @@ def twod_input():
 
     return array_2d
 
-def diagonalize_matrix(A):
-    # Compute the eigendecomposition of A
-    eigenvalues, eigenvectors = np.linalg.eig(A)
-    # Construct the diagonal matrix D with eigenvalues
-    D = np.diag(eigenvalues)
-    # Construct the matrix P with eigenvectors as columns
-    P = eigenvectors
-    # Compute the inverse of P
-    P_inv = np.linalg.inv(P)
-    # Compute P^(-1)AP
-    diagonalized_A = P_inv @ A @ P
-    print(f"Matrix P:\n {P}") 
-    print(f"Diagonal D:\n {D}")
-    print(F"Diagonalized A:\n {diagonalized_A}")
-    return {"P": P, "D": D, "Diagonalized A": diagonalized_A}
 
 def complex_twod_input():
     print("Enter Complex matrix A")
