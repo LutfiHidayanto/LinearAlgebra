@@ -1,3 +1,5 @@
+Note: Asumsi user ingin pembulatan 5 di belakang koma
+jika user ingin solusi exact, ganti 'y' menjadi 'n' setelah memilih opsi kalkulator
 
 **Test case 1a LIE**
 
