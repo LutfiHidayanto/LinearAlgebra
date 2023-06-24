@@ -26,7 +26,7 @@ Sebuah program Python yang melakukan berbagai perhitungan matriks, termasuk peme
 2. Arahkan ke direktori di mana berkas program berada.
 3. Jalankan program dengan mengeksekusi perintah berikut:
    ```
-   python matrix_calculator.py
+   python matrix.py
    ```
 4. Ikuti petunjuk yang ditampilkan di layar untuk memilih operasi yang diinginkan dan memberikan input yang diperlukan.
 5. Lihat hasilnya di terminal atau command prompt.
@@ -45,3 +45,44 @@ Program ini menyediakan opsi berikut:
 7. Diagonalisasi Matriks: Diagonalisasi sebuah matriks.
 8. Sistem Persamaan Linear Kompleks: Menyelesaikan sistem persamaan linear kompleks.
 9. Keluar: Keluar dari program.
+
+## Tutorial Menguji Test case
+
+1. Buka file "Test cases.txt"
+2. Perhatikan tulisan berikut
+   ```
+   *Gauss Jordan
+   Input:
+   1
+   y
+   4
+   4
+   1 1 -1 -1
+   2 5 -7 -5
+   2 -1 1 3
+   5 2 -4 2
+   1 -2 4 6
+   1
+   ```
+3. Copy paste
+   ```
+   1
+   y
+   4
+   4
+   1 1 -1 -1
+   2 5 -7 -5
+   2 -1 1 3
+   5 2 -4 2
+   1 -2 4 6
+   1
+   ```
+   ke dalam terminal. Paste menggunakan ctrl + shift + v jika menggunakan windows os.
+4. Jika output belum muncul, klik Enter
+5. Berikut adalah contoh output:
+   ```
+   Output:
+   The system of equations is underdetermined with infinite solutions.
+   Using Gauss-Jordan Method
+   Solution: {'x1': 1.83333333333333 - 0.666666666666667*x4, 'x2': 2.66666666666667*x4 - 0.0833333333333333, 'x3': x4 + 0.75, 'x4': x4}
+   ```
