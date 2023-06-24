@@ -46,8 +46,3 @@ The program provides the following options:
 8. Complex Linear Equation System: Solves a system of complex linear equations.
 9. Exit: Quits the program.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-```
-
