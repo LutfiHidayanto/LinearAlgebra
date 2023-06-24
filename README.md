@@ -1,6 +1,6 @@
-# Kalkulator Matriks untuk Aljabar Linear
+# Kalkulator Matriks Aljabar Linear
 
-Sebuah program Python yang melakukan berbagai perhitungan matriks, termasuk pemecahan sistem persamaan linear, dekomposisi nilai singular, eigennilai dan eigenvector, invers matriks, memeriksa apakah matriks diagonal, karakteristik polinomial, dan diagonalisasi matriks.
+Sebuah program Python yang melakukan berbagai perhitungan matriks, termasuk pemecahan sistem persamaan linear, dekomposisi nilai singular, eigenvalue dan eigenvector, invers matriks, memeriksa apakah matriks diagonal, karakteristik polinomial, dan diagonalisasi matriks, serta sistem permasaan linear kompleks.
 
 ## Persyaratan
 
@@ -10,8 +10,8 @@ Sebuah program Python yang melakukan berbagai perhitungan matriks, termasuk peme
 
 ## Instalasi
 
-1. Klon repository atau unduh berkas program.
-2. Pasang pustaka yang diperlukan dengan menjalankan perintah berikut:
+1. Klon repository atau download berkas program.
+2. Install library yang diperlukan dengan menjalankan perintah berikut:
    ```
    pip install numpy sympy
    ```
@@ -30,7 +30,7 @@ Sebuah program Python yang melakukan berbagai perhitungan matriks, termasuk peme
    ```
 4. Ikuti petunjuk yang ditampilkan di layar untuk memilih operasi yang diinginkan dan memberikan input yang diperlukan.
 5. Lihat hasilnya di terminal atau command prompt.
-6. Program juga akan menghasilkan sebuah berkas bernama "matrix_output.txt" yang berisi perhitungan yang dilakukan.
+6. Program juga akan menghasilkan sebuah file txt bernama "matrix_output.txt" yang berisi perhitungan yang dilakukan.
 
 ## Menu Program
 
