@@ -1,8 +1,5 @@
 # LinearAlgebra
 
-Certainly! Here's the complete README.md file:
-
-```markdown
 # Matrix Calculator
 
 A Python program that performs various matrix calculations, including solving linear equation systems, singular value decomposition, eigenvalues and eigenvectors, matrix inverses, checking if a matrix is diagonal, polynomial characteristics, and diagonalizing matrices.
