@@ -51,4 +51,3 @@ The program provides the following options:
 This project is licensed under the [MIT License](LICENSE).
 ```
 
-Please note that the format might look slightly different when viewed in a Markdown renderer, but the content should remain the same.
