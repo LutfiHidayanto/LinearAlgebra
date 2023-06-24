@@ -2,15 +2,20 @@ import numpy as np
 from sympy import symbols, Eq, solve
 
 def write_to_file(title, output, *matrix):
+    # For writing calculations into txt file
     with open('matrix_output.txt', 'a') as file:
+        # writing title of the calculation
         file.write(f"\n{title}\n")
         char = 'A'
+        # writing matrix input
         for i in matrix:
             file.write(f"Matrix {char}:\n")
-            char = chr(ord(char) + 1)
+            # increase ascii value of A, so it become B
+            char = chr(ord(char) + 1) 
             file.write(str(i))
             file.write("\n\n")
         file.write("Output:\n")
+        # writing solution
         if isinstance(output, dict):
             for key, value in output.items():
                 file.write(f"{key}:\n{value}\n")
@@ -84,11 +89,12 @@ def solve_linear_equation(A, b):
     print("3. Least squares")
     print("Note: non-square matrices only work with least squares method")
     choice = int(input("Choice: "))
+    print("\nResult: ")
     if choice == 1:
         x = gauss_jordan_elimination(A, b)
         if x is not None:
             print("Using Gauss-Jordan Method")
-            print(f"Solution:\n {x}")
+            print(f"Solution: {x}")
     elif choice == 2:
         try:
             print("Using LU decomposition with partial pivoting")
@@ -102,17 +108,8 @@ def solve_linear_equation(A, b):
     elif choice == 3:
         print("Using Least Square Approach:")
         # solving problem using least square and store the results in x
-        x, residual, rank, s = np.linalg.lstsq(A, b, rcond=None)
-        # comparing rank with number of variables
-        if rank < A.shape[1]: 
-            print("The system of equations has no solution.")
-            return None
-        elif rank < A.shape[1]:
-            print("The system of equations is underdetermined with infinite solutions.")
-            return None
-        else:
-            print("The system of equations has a unique solution.")
-            print(f"Solution: {x}")
+        x = np.linalg.lstsq(A, b, rcond=None)[0]
+        print(f"Solution: {x}")
     # if input is invalid
     else:
         return None
@@ -232,6 +229,8 @@ def complex_twod_input():
 def main():
     new_matrix = 'Y'
     while(True):
+        # Program Menu
+        print("======== Matrix Calculator ======\n")
         print("PROGRAM MENU")
         print("1. LINEAR EQUATIONS SYSTEM")
         print("2. SVD")
@@ -243,20 +242,21 @@ def main():
         print("8. COMPLEX LINEAR EQUATIONS SYSTEM")
         print("9. EXIT")
         choice = int(input("INPUT: "))
-        b = None
-        if (new_matrix == 'Y' or new_matrix == 'y') and choice != 8:
+        # If user wants to insert new matrix
+        if (new_matrix == 'Y' or new_matrix == 'y') and choice != 8: # and not a complex matrix
             a = twod_input()
-        elif choice == 8:
+        elif choice == 8: # if user wants to insert new complex matrix 
             a = complex_twod_input()
         if choice != 8:
             print("\nInput:")
-            print(f"Matrix A:\n {a}\n")
+            print(f"Matrix A:\n{a}\n")
         if choice != 1 and choice != 8:
-            print("\nResult: ")
+            print("\nResult:")
 
         if choice == 1:
-            b = np.array([int(value) for value in input("Enter matrix b: ").split()])
-            print("\nResult: ")
+            if (new_matrix == 'Y'or new_matrix == 'y'):
+                b = np.array([int(value) for value in input("Enter matrix b: ").split()])
+            print(f"Matrix b: {b}\n")
             sol = solve_linear_equation(a, b)
             title = "Linear Equation System"
         elif choice == 2:
@@ -278,7 +278,9 @@ def main():
             sol = diagonalize_matrix(a)
             title = "Diagonalize Matrix"
         elif choice == 8:
-            b = np.array([complex(value) for value in input("Enter matrix b: ").split()])
+            if (new_matrix == 'Y'or new_matrix == 'y'):
+                b = np.array([complex(value) for value in input("Enter matrix b: ").split()])
+            print(f"Matrix b: {b}\n")
             print("\nResult: ")
             sol = solve_complex_linear_equation(a, b)
             title = "Complex Linear Equations System"
@@ -286,7 +288,7 @@ def main():
             break
         else:
             print("Input is not valid. Try again!")
-        if b is not None:
+        if choice == 1 or choice == 8:
             write_to_file(title, sol, a, b)
         else:
             write_to_file(title, sol, a)
