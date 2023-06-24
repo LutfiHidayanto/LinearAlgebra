@@ -136,28 +136,19 @@ def singular_value_decomposition(matrix, rounded = False):
     print(f"U:\n {U}\nS:\n {S}\nV:\n {V}")
     return {'U': U, 'S': S, 'V': V}
 
-def solve_complex_linear_equation(A, b, rounded = False):
+def solve_complex_linear_equation(A, b, rounded=False):
     # Singular Value Decomposition
-    # if matrix is square then use SVD method
-    if A.shape[0] == A.shape[1]:
-        print("Using SVD method")
-        U, s, Vh = np.linalg.svd(A)
-        # Pseudoinverse of Σ
-        S_inv = np.zeros(A.shape, dtype=complex)
-        S_inv[:A.shape[1], :A.shape[1]] = np.diag(1/s)
-
-        # Compute the solution matrix X
-        X = Vh.conj().T @ S_inv @ U.conj().T @ b[:, np.newaxis]
-        X = X.flatten()
-    # if matrix non square, use moore-penrose 
-    else:
-        print("Using Moore-Penrose pseudoinverse")
-        A_inv = np.linalg.pinv(A)
-        X = np.dot(A_inv, b)
+    U, S, V = np.linalg.svd(A, full_matrices=False)
+    X = V.T @ np.diag(1 / S) @ U.T @ b
     if rounded:
         X = np.round(X, DECIMAL_PLACES)
-    print(X)
-    return X
+    solution = {}
+    # Change the solution into dictionary so that it more readable
+    for i, value in enumerate(X):
+        solution[f'x{i+1}'] = value
+    print(f"Solution:\n{solution}")
+    return solution
+
 
 def is_diagonal(matrix):
     # Check if a matrix is diagonalized 
@@ -352,12 +343,7 @@ def main():
         else:
             write_to_file(title, sol, a)
         # New Matrix or no
-        while True:
-            new_matrix = (input("Do you want to input a new matrix?(Y/N)"))
-            if new_matrix != 'Y' and new_matrix != 'y' and new_matrix != 'N' and new_matrix != 'n':
-                print("Invalid input. Try again!")
-            else:
-                break
+        new_matrix = validate_user_input("Do you want to input a new matrix?(Y/N)")
         print("\n")
 
 if __name__ == "__main__":
