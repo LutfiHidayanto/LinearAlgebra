@@ -1,48 +1,47 @@
-# Matrix Calculator for Linear Algebra
+# Kalkulator Matriks untuk Aljabar Linear
 
-A Python program that performs various matrix calculations, including solving linear equation systems, singular value decomposition, eigenvalues and eigenvectors, matrix inverses, checking if a matrix is diagonal, polynomial characteristics, and diagonalizing matrices.
+Sebuah program Python yang melakukan berbagai perhitungan matriks, termasuk pemecahan sistem persamaan linear, dekomposisi nilai singular, eigennilai dan eigenvector, invers matriks, memeriksa apakah matriks diagonal, karakteristik polinomial, dan diagonalisasi matriks.
 
-## Requirements
+## Persyaratan
 
 - Python 3.x
-- numpy library
-- sympy library
+- pustaka numpy
+- pustaka sympy
 
-## Installation
+## Instalasi
 
-1. Clone the repository or download the program files.
-2. Install the required libraries by running the following command:
+1. Klon repository atau unduh berkas program.
+2. Pasang pustaka yang diperlukan dengan menjalankan perintah berikut:
    ```
    pip install numpy sympy
    ```
-   or
+   atau
    ```
    pip3 install numpy sympy
    ```
 
-## Usage
+## Penggunaan
 
-1. Open a terminal or command prompt.
-2. Navigate to the directory where the program files are located.
-3. Run the program by executing the following command:
+1. Buka terminal atau command prompt.
+2. Arahkan ke direktori di mana berkas program berada.
+3. Jalankan program dengan mengeksekusi perintah berikut:
    ```
    python matrix_calculator.py
    ```
-4. Follow the on-screen instructions to choose the desired operation and provide the necessary inputs.
-5. View the results in the terminal or command prompt.
-6. The program will also generate a file named "matrix_output.txt" that contains the calculations performed.
+4. Ikuti petunjuk yang ditampilkan di layar untuk memilih operasi yang diinginkan dan memberikan input yang diperlukan.
+5. Lihat hasilnya di terminal atau command prompt.
+6. Program juga akan menghasilkan sebuah berkas bernama "matrix_output.txt" yang berisi perhitungan yang dilakukan.
 
-## Program Menu
+## Menu Program
 
-The program provides the following options:
+Program ini menyediakan opsi berikut:
 
-1. Linear Equation System: Solves a system of linear equations.
-2. Singular Value Decomposition (SVD): Performs singular value decomposition on a matrix.
-3. Eigenvalues and Eigenvectors: Calculates the eigenvalues and eigenvectors of a matrix.
-4. Matrix Inverse: Computes the inverse of a matrix.
-5. Check if Matrix is Diagonal: Checks if a matrix is diagonal.
-6. Polynomial Characteristics: Calculates the polynomial characteristics of a matrix.
-7. Diagonalize Matrix: Diagonalizes a matrix.
-8. Complex Linear Equation System: Solves a system of complex linear equations.
-9. Exit: Quits the program.
-
+1. Sistem Persamaan Linear: Menyelesaikan sistem persamaan linear.
+2. Dekomposisi Nilai Singular (SVD): Melakukan dekomposisi nilai singular pada sebuah matriks.
+3. Eigennilai dan Eigenvector: Menghitung eigennilai dan eigenvector dari sebuah matriks.
+4. Invers Matriks: Menghitung invers dari sebuah matriks.
+5. Periksa Apakah Matriks Diagonal: Memeriksa apakah sebuah matriks diagonal.
+6. Karakteristik Polinomial: Menghitung karakteristik polinomial dari sebuah matriks.
+7. Diagonalisasi Matriks: Diagonalisasi sebuah matriks.
+8. Sistem Persamaan Linear Kompleks: Menyelesaikan sistem persamaan linear kompleks.
+9. Keluar: Keluar dari program.
