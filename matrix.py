@@ -1,6 +1,8 @@
 import numpy as np
 from sympy import symbols, Eq, solve
 
+DECIMAL_PLACES = 5
+
 def write_to_file(title, output, *matrix):
     # For writing calculations into txt file
     with open('matrix_output.txt', 'a') as file:
@@ -33,6 +35,10 @@ def gauss_jordan_elimination(A, b):
 
     # Augmented matrix [A|b]
     aug_matrix = np.concatenate((A, np.expand_dims(b, axis=1)), axis=1)
+
+    if n != m:
+        print("Can't calculate matrix is non square with this method")
+        return None
 
     # Apply Gauss-Jordan elimination
     for i in range(n):
@@ -79,7 +85,7 @@ def gauss_jordan_elimination(A, b):
     return solution
 
 
-def solve_linear_equation(A, b):
+def solve_linear_equation(A, b, rounded = False):
     # Ax = b
     # A: coefficient matrix
     # b: constant vector
@@ -94,12 +100,10 @@ def solve_linear_equation(A, b):
         x = gauss_jordan_elimination(A, b)
         if x is not None:
             print("Using Gauss-Jordan Method")
-            print(f"Solution: {x}")
     elif choice == 2:
         try:
             print("Using LU decomposition with partial pivoting")
             x = np.linalg.solve(A, b)
-            print(f"Solution: {x}")
         # Catch exception if matrix is non square, or there is no solution or infinite
         except np.linalg.LinAlgError:
             print("The system of equations has no solution or underdetermined")
@@ -109,19 +113,30 @@ def solve_linear_equation(A, b):
         print("Using Least Square Approach:")
         # solving problem using least square and store the results in x
         x = np.linalg.lstsq(A, b, rcond=None)[0]
-        print(f"Solution: {x}")
     # if input is invalid
     else:
         return None
+    # printing solution for choice 2, 3 
+    if x is not None and choice != 1:
+        x = [round(num, DECIMAL_PLACES) for num in x]
+    print(f"Solution: {x}")
     return x
 
-def singular_value_decomposition(matrix):
+def singular_value_decomposition(matrix, rounded = False):
     # calculate SVD 
-    U, S, V = np.linalg.svd(matrix)
+    try:
+        U, S, V = np.linalg.svd(matrix)
+    except np.linalg.LinAlgError:
+        print("Can't compute this matrix")
+        return None
+    if rounded:
+        U = np.round(U, DECIMAL_PLACES)
+        S = np.round(S, DECIMAL_PLACES)
+        V = np.round(V, DECIMAL_PLACES)
     print(f"U:\n {U}\nS:\n {S}\nV:\n {V}")
     return {'U': U, 'S': S, 'V': V}
 
-def solve_complex_linear_equation(A, b):
+def solve_complex_linear_equation(A, b, rounded = False):
     # Singular Value Decomposition
     # if matrix is square then use SVD method
     if A.shape[0] == A.shape[1]:
@@ -139,6 +154,8 @@ def solve_complex_linear_equation(A, b):
         print("Using Moore-Penrose pseudoinverse")
         A_inv = np.linalg.pinv(A)
         X = np.dot(A_inv, b)
+    if rounded:
+        X = np.round(X, DECIMAL_PLACES)
     print(X)
     return X
 
@@ -152,29 +169,52 @@ def is_diagonal(matrix):
         print("Matrix is not diagonal")
     return is_diagonal
 
-def eigenvalues_vector(matrix):
+def eigenvalues_vector(matrix, rounded = False):
     # Calculate eigenvalues and eigenvectors
-    eigenvalues, eigenvector  = np.linalg.eig(matrix)
+    try:
+        eigenvalues, eigenvector  = np.linalg.eig(matrix)
+    except np.linalg.LinAlgError:
+        print("Matrix must be Square")
+        return None
+    if rounded:
+        eigenvalues = np.round(eigenvalues, DECIMAL_PLACES)
+        eigenvector = np.round(eigenvector, DECIMAL_PLACES)
     print(f"Eigenvalues: {eigenvalues}")
-    print(f"Eigenvector:\n {eigenvector}")
+    print(f"Eigenvector:\n{eigenvector}")
     return {"Eigenvalues": eigenvalues, "Eigenvector": eigenvector}
 
-def polynomial_char(matrix):
+def polynomial_char(matrix, rounded = False):
     # calculate polynomaial characteristics
-    eigenvalues = np.linalg.eigvals(matrix)
+    try:
+        eigenvalues = np.linalg.eigvals(matrix)
+    except np.linalg.LinAlgError:
+        print("Matrix must be Square")
+        return None
     polychar = np.poly(eigenvalues)
-    print(f"Polynomial Characteristics:\n {polychar}")
+    if rounded:
+        polychar = np.round(polychar, DECIMAL_PLACES)
+    print(f"Polynomial Characteristics:\n{polychar}")
     return polychar
 
-def invers(matrix):
+def invers(matrix, rounded = False):
     # calculate matrix invers
-    invers = np.linalg.inv(matrix)
-    print(f"Invers matrix:\n {invers}")
+    try:
+        invers = np.linalg.inv(matrix)
+    except np.linalg.LinAlgError:
+        print("Matrix must be Square")
+        return None 
+    if rounded:
+        invers = np.round(invers, DECIMAL_PLACES)
+    print(f"Invers matrix:\n{invers}")
     return invers
 
-def diagonalize_matrix(A):
+def diagonalize_matrix(A, rounded = False):
     # calculate the eigendecomposition of A
-    eigenvalues, eigenvectors = np.linalg.eig(A)
+    try:
+        eigenvalues, eigenvectors = np.linalg.eig(A)
+    except np.linalg.LinAlgError:
+        print("Matrix must be Square")
+        return None 
     # construct the diagonal matrix D with eigenvalues
     D = np.diag(eigenvalues)
     # Construct the matrix P with eigenvectors as columns
@@ -183,6 +223,11 @@ def diagonalize_matrix(A):
     P_inv = np.linalg.inv(P)
     # calculate P^(-1)AP
     diagonalized_A = P_inv @ A @ P
+    # Specify the desired number of decimal places
+    if rounded:
+        P = np.round(P, DECIMAL_PLACES)
+        D = np.round(D, DECIMAL_PLACES)
+        diagonalized_A = np.round(diagonalized_A, DECIMAL_PLACES)
     print(f"Matrix P:\n {P}") 
     print(f"Diagonal D:\n {D}")
     print(F"Diagonalized A:\n {diagonalized_A}")
@@ -222,9 +267,15 @@ def complex_twod_input():
         values = [complex(value.replace('-j', '-1j')) for value in row_input.split()]
         input_values.append(values)
     array_2d = np.array(input_values)
-
     return array_2d
 
+def validate_user_input(inputstr):
+    while True:
+        user_input = input(inputstr)
+        if user_input.lower() in ['y', 'n']:
+            return user_input.lower()
+        else:
+            print("Invalid input. Try again")
 
 def main():
     new_matrix = 'Y'
@@ -242,56 +293,65 @@ def main():
         print("8. COMPLEX LINEAR EQUATIONS SYSTEM")
         print("9. EXIT")
         choice = int(input("INPUT: "))
+        # Round number or not
+        if choice != 5 and choice != 9:
+            rounded = validate_user_input("Do you want to round number to 5 decimal places?:{Y/N} ")
+            if rounded == 'y':
+                rounded = True
+            else:
+                rounded = False 
         # If user wants to insert new matrix
-        if (new_matrix == 'Y' or new_matrix == 'y') and choice != 8: # and not a complex matrix
+        if (new_matrix == 'Y' or new_matrix == 'y') and choice != 8 and choice != 9: # and not a complex matrix
             a = twod_input()
-        elif choice == 8: # if user wants to insert new complex matrix 
+        elif choice == 8 and choice != 9: # if user wants to insert new complex matrix 
             a = complex_twod_input()
-        if choice != 8:
+        if choice != 8 and choice != 9:
             print("\nInput:")
             print(f"Matrix A:\n{a}\n")
-        if choice != 1 and choice != 8:
+        if choice != 1 and choice != 8 and choice != 9:
             print("\nResult:")
-
+        # Processing matrix
         if choice == 1:
             if (new_matrix == 'Y'or new_matrix == 'y'):
                 b = np.array([int(value) for value in input("Enter matrix b: ").split()])
             print(f"Matrix b: {b}\n")
-            sol = solve_linear_equation(a, b)
+            sol = solve_linear_equation(a, b, rounded)
             title = "Linear Equation System"
         elif choice == 2:
-            sol = singular_value_decomposition(a)
+            sol = singular_value_decomposition(a, rounded)
             title = "Singular Value Decomposition"
         elif choice == 3:
-            sol = eigenvalues_vector(a)
+            sol = eigenvalues_vector(a, rounded)
             title = "Eigenvalues and Eigenvectors"
         elif choice == 4:
-            sol = invers(a)
+            sol = invers(a, rounded)
             title = "Invers"
         elif choice == 5:
             sol = is_diagonal(a)
             title = "Is Matrix Diagonal?"
         elif choice == 6:
-            sol = polynomial_char(a)
+            sol = polynomial_char(a, rounded)
             title = "Polynomial Characteristics"
         elif choice == 7:
-            sol = diagonalize_matrix(a)
+            sol = diagonalize_matrix(a, rounded)
             title = "Diagonalize Matrix"
         elif choice == 8:
             if (new_matrix == 'Y'or new_matrix == 'y'):
                 b = np.array([complex(value) for value in input("Enter matrix b: ").split()])
             print(f"Matrix b: {b}\n")
             print("\nResult: ")
-            sol = solve_complex_linear_equation(a, b)
+            sol = solve_complex_linear_equation(a, b, rounded)
             title = "Complex Linear Equations System"
         elif choice == 9:
             break
         else:
             print("Input is not valid. Try again!")
+        # Writing to file txt
         if choice == 1 or choice == 8:
             write_to_file(title, sol, a, b)
         else:
             write_to_file(title, sol, a)
+        # New Matrix or no
         while True:
             new_matrix = (input("Do you want to input a new matrix?(Y/N)"))
             if new_matrix != 'Y' and new_matrix != 'y' and new_matrix != 'N' and new_matrix != 'n':
