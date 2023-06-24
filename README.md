@@ -1,6 +1,4 @@
-# LinearAlgebra
-
-# Matrix Calculator
+# Matrix Calculator for Linear Algebra
 
 A Python program that performs various matrix calculations, including solving linear equation systems, singular value decomposition, eigenvalues and eigenvectors, matrix inverses, checking if a matrix is diagonal, polynomial characteristics, and diagonalizing matrices.
 
@@ -16,6 +14,10 @@ A Python program that performs various matrix calculations, including solving li
 2. Install the required libraries by running the following command:
    ```
    pip install numpy sympy
+   ```
+   or
+   ```
+   pip3 install numpy sympy
    ```
 
 ## Usage
