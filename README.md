@@ -1,12 +1,12 @@
 # Kalkulator Matriks Aljabar Linear
 
-Sebuah program Python yang melakukan berbagai perhitungan matriks, termasuk pemecahan sistem persamaan linear, dekomposisi nilai singular, eigenvalue dan eigenvector, invers matriks, memeriksa apakah matriks diagonal, karakteristik polinomial, dan diagonalisasi matriks, serta sistem permasaan linear kompleks.
+Sebuah program Python yang melakukan berbagai perhitungan matriks, termasuk pemecahan sistem persamaan linear, dekomposisi nilai singular, eigenvalue dan eigenvector, invers matriks, memeriksa apakah matriks diagonal, karakteristik polinomial, dan diagonalisasi matriks, serta sistem persamaan linear kompleks.
 
 ## Persyaratan
 
 - Python 3.x
-- pustaka numpy
-- pustaka sympy
+- Library numpy
+- Library sympy
 
 ## Instalasi
 
