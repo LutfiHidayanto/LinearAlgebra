@@ -52,7 +52,7 @@ Program ini menyediakan opsi berikut:
 
 ## Tutorial Menguji Test case
 
-1. Buka file "Test cases.txt"
+1. Buka file "Data uji.txt"
 2. Perhatikan tulisan berikut
    ```
    *Gauss Jordan
