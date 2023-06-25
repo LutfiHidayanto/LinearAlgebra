@@ -1,4 +1,4 @@
-https://github.com/LutfiHidayanto/LinearAlgebra.git
+Untuk tampilan file lebih jelas, klik link berikut: https://github.com/LutfiHidayanto/LinearAlgebra.git
 
 # Kalkulator Matriks Aljabar Linear
 
