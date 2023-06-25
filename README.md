@@ -32,6 +32,10 @@ Sebuah program Python yang melakukan berbagai perhitungan matriks, termasuk peme
 5. Lihat hasilnya di terminal atau command prompt.
 6. Program juga akan menghasilkan sebuah file txt bernama "matrix_output.txt" yang berisi perhitungan yang dilakukan.
 
+### Catatan input opsi 8/Complex Linear Equations
+
+Untuk mengisi input pada opsi 8, Anda perlu menulis input dalam bentuk ```konstant+koefj```. Misal, jika entri dalam matriks axy konstan 2, maka ```2+0j``` dan jika entri dalan matriks axy memiliki variabel j dengan koefisien 2, maka ```0+2j```.
+
 ## Menu Program
 
 Program ini menyediakan opsi berikut:
