@@ -1,0 +1,414 @@
+Note: Asumsi user ingin pembulatan 5 di belakang koma
+jika user ingin solusi exact, ganti 'y' menjadi 'n' setelah memilih opsi kalkulator
+
+**Test case 1a LIE**
+
+*Gauss Jordan
+Input:
+1
+y
+4
+4
+1 1 -1 -1
+2 5 -7 -5
+2 -1 1 3
+5 2 -4 2
+1 -2 4 6
+1	
+
+Output:
+The system of equations is underdetermined with infinite solutions.
+Using Gauss-Jordan Method
+Solution: {'x1': 1.83333333333333 - 0.666666666666667*x4, 'x2': 2.66666666666667*x4 - 0.0833333333333333, 'x3': x4 + 0.75, 'x4': x4}
+
+
+*linalg.solve()
+Input:
+1
+y
+4
+4
+1 1 -1 -1
+2 5 -7 -5
+2 -1 1 3
+5 2 -4 2
+1 -2 4 6
+2
+
+Jika tidak ingin menutup program/menutup terminal terlebih dahulu, bisa input berikut
+Input:
+n
+1
+y
+2
+
+Output:
+Solution: [750599937895084.9, -3002399751580333.0, -1125899906842624.2, -1125899906842624.8]
+
+*linalg.lstsq()
+Input:
+1
+y
+4
+4
+1 1 -1 -1
+2 5 -7 -5
+2 -1 1 3
+5 2 -4 2
+1 -2 4 6
+2
+3
+
+Jika tidak ingin menutup program/menutup terminal terlebih dahulu, bisa input berikut
+Input:
+n
+1
+y
+3
+
+Output:
+Solution: [1.60299, 0.08804, 0.66694, 0.16694]
+
+
+Note: Jika tidak ingin menutup program terlebih dahulu, tambahkan 'Y' pada awal. contoh:
+Input:
+Y
+1
+y
+4
+5
+1 -1 0 0 1
+1 1 0 -3 0
+2 -1 0 1 -1
+-1 2 0 -2 -1
+3 6 5 -1
+
+**Test case 1b**
+*gauss jordan
+Input:
+1
+y
+4
+5
+1 -1 0 0 1
+1 1 0 -3 0
+2 -1 0 1 -1
+-1 2 0 -2 -1
+3 6 5 -1
+1
+
+Output:
+Can't calculate matrix is non square with this method
+Solution: None
+
+*linalg.solve()
+Input:
+1
+y
+4
+5
+1 -1 0 0 1
+1 1 0 -3 0
+2 -1 0 1 -1
+-1 2 0 -2 -1
+3 6 5 -1
+2
+
+Jika tidak ingin menutup program/menutup terminal terlebih dahulu, bisa input berikut
+Input:
+n
+1
+y
+2
+
+Output:
+Using LU decomposition with partial pivoting
+The system of equations has no solution or underdetermined
+
+*linalg.lstsq()
+Input:
+1
+y
+4
+5
+1 -1 0 0 1
+1 1 0 -3 0
+2 -1 0 1 -1
+-1 2 0 -2 -1
+3 6 5 -1
+3
+
+Jika tidak ingin menutup program/menutup terminal terlebih dahulu, bisa input berikut
+Input:
+n
+1
+y
+3
+
+Output:
+Solution: [2.71429, -0.57143, 0.0, -1.28571, -0.28571]
+
+
+Note: Jika tidak ingin menutup program terlebih dahulu, tambahkan 'Y' pada awal. contoh:
+Input:
+Y
+1
+y
+4
+5
+1 -1 0 0 1
+1 1 0 -3 0
+2 -1 0 1 -1
+-1 2 0 -2 -1
+3 6 5 -1
+
+**Test case 2a LIE**
+
+*gauss jordan
+Input:
+1
+y
+4
+4
+3 8 -3 -14
+2 3 -1 -2
+1 -2 1 10
+1 5 -2 -12
+2 1 0 1
+1
+
+Output:
+The system of equations is underdetermined with infinite solutions.
+Using Gauss-Jordan Method
+Solution: {'x1': -0.142857142857143*x3 - 3.71428571428571*x4 + 0.285714285714286, 'x2': 0.428571428571429*x3 + 3.14285714285714*x4 + 0.142857142857143, 'x3': x3, 'x4': x4}
+
+*linalg.solve()
+Input:
+N
+1
+y
+2
+
+Output:
+Result:
+Using LU decomposition with partial pivoting
+The system of equations has no solution or underdetermined
+
+*linalg.lstsq
+Input:
+N
+1
+y
+3
+
+Output:
+Using Least Square Approach:
+Solution: [0.18472, 0.20889, -0.06313, 0.02962]
+
+
+**Test case 2b LIE**
+*gauss jordan
+Input:
+1
+y
+4
+4
+1 -1 1 -1
+-1 1 1 1
+1 1 -1 1
+1 1 1 1
+0 0 0 0
+1 
+
+Output:
+The system of equations is underdetermined with infinite solutions.
+Using Gauss-Jordan Method
+Solution: {'x1': 0.0, 'x2': -x4, 'x3': 0.0, 'x4': x4}
+
+*linalg..solve()
+Input:
+N
+1
+y
+2 
+
+Output:
+Using LU decomposition with partial pivoting
+The system of equations has no solution or underdetermined
+
+*linalg.lstsq()
+Input:
+N
+1
+y
+3 
+
+Output:
+Using Least Square Approach:
+Solution: [0.0, 0.0, 0.0, 0.0]
+
+Note: tambahkan 'Y' di awal input jika tidak menutup program dahulu
+
+**Test case 3a POL, EIG, DIAGONALIZED**
+*Eigenvalues eigenvector
+Input:
+3
+y
+3
+3
+3 1 1
+-4 -2 -5
+2 2 5
+
+Output:
+Eigenvalues: [1. 2. 3.]
+Eigenvector:
+[[ 0.30151 -0.70711  0.     ]
+ [-0.90453  0.70711 -0.70711]
+ [ 0.30151 -0.       0.70711]]
+
+
+*polynomial_char
+"jika tidak menutup program"
+Input:
+N
+6
+y
+
+Output:
+Polynomial Characteristics:
+[ 1. -6. 11. -6.]
+
+*P-1AP
+"jika tidak menutup program"
+Input:
+N
+7
+y
+
+Output:
+Matrix P:
+ [[ 0.30151 -0.70711  0.     ]
+ [-0.90453  0.70711 -0.70711]
+ [ 0.30151 -0.       0.70711]]
+Diagonal D:
+ [[1. 0. 0.]
+ [0. 2. 0.]
+ [0. 0. 3.]]
+Diagonalized A:
+ [[ 1.  0.  0.]
+ [-0.  2.  0.]
+ [ 0. -0.  3.]]
+
+
+**Test case 3b POL, eig, diag** 
+*eigenvalues_vector
+Input:
+3
+y
+3
+3
+2 1 1
+0 1 0
+1 -1 2
+
+Output:
+Eigenvalues: [3. 1. 1.]
+Eigenvector:
+[[ 0.70711 -0.70711 -0.70711]
+ [ 0.       0.       0.     ]
+ [ 0.70711  0.70711  0.70711]]
+
+*polynomial_char
+"jika tidak menutup program"
+Input:
+N
+6
+y
+
+Output:
+Polynomial Characteristics:
+[ 1. -5.  7. -3.]
+
+*P-1AP
+"jika tidak menutup program"
+Input:
+N
+7
+y
+
+Output:
+Matrix P:
+ [[ 0.70711 -0.70711 -0.70711]
+ [ 0.       0.       0.     ]
+ [ 0.70711  0.70711  0.70711]]
+Diagonal D:
+ [[3. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+Diagonalized A:
+ [[ 3.  0.  0.]
+ [ 0.  1. -0.]
+ [ 0.  0.  1.]]
+
+**Test case 4a SVD**
+Input:
+2
+Y
+3
+2
+1 -1
+0 1
+1 0
+
+Output:
+U:
+ [[-0.8165   0.      -0.57735]
+ [ 0.40825 -0.70711 -0.57735]
+ [-0.40825 -0.70711  0.57735]]
+S:
+ [1.73205 1.     ]
+V:
+ [[-0.70711  0.70711]
+ [-0.70711 -0.70711]]
+
+**Test case 4b SVD**
+Input:
+2
+y
+3
+3
+1 1 1
+-1 0 -2
+1 2 0
+
+Output:
+U:
+ [[-0.57735  0.      -0.8165 ]
+ [ 0.57735 -0.70711 -0.40825]
+ [-0.57735 -0.70711  0.40825]]
+S:
+ [3. 2. 0.]
+V:
+ [[-0.57735 -0.57735 -0.57735]
+ [ 0.      -0.70711  0.70711]
+ [ 0.8165  -0.40825 -0.40825]]
+
+
+**Test case 5 SVD compleks**
+Note: variable 'i' diganti ke variable 'j' untuk memudahkan perhitungan.
+input:
+8
+y
+6
+5
+1j 0j -1+0j 0j 1+0j
+1+0j 1+0j -1+0j 0j 0j
+2+0j 0+0j 5+0j 0j 0j 
+0j 2+0j 2+0j 0j 0j 
+0j 0j 0j 1+0j 1+0j
+j j 0j 0j 0j
+3+0j 4j -3j -5+0j 5+0j -3+0j
+Output:
+Solution:
+{'x1': (1.53409+0.04545j), 'x2': (-1.875+0.5j), 'x3': (-0.60606-0.69697j), 'x4': (2.65152-0.83712j), 'x5': (2.34848+0.83712j)}
