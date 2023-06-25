@@ -1,3 +1,5 @@
+https://github.com/LutfiHidayanto/LinearAlgebra.git
+
 # Kalkulator Matriks Aljabar Linear
 
 Sebuah program Python yang melakukan berbagai perhitungan matriks, termasuk pemecahan sistem persamaan linear, dekomposisi nilai singular, eigenvalue dan eigenvector, invers matriks, memeriksa apakah matriks diagonal, karakteristik polinomial, dan diagonalisasi matriks, serta sistem persamaan linear kompleks.
